@@ -66,7 +66,7 @@ def test_carga ():
 
 
 def setUp():
-    print('Loading books')
+    print('Loading movies')
     loadCSVFile(lista, lst_books)
     print(lst_books['size'])
 
@@ -86,8 +86,13 @@ def printList(lst):
         element = it.next(iterator)
         print(element['goodreads_book_id'])
 
-def less(element1, element2):
-    if int(element1['goodreads_book_id']) < int(element2['goodreads_book_id']):
+def lessfunction(element1, element2):
+    if int(element1['vote_average']) < int(element2['vote_average']):
+        return True
+    return False
+
+def greater(element1, element2):
+    if int(element1['vote_average']) > int(element2['vote_average']):
         return True
     return False
 
@@ -105,9 +110,9 @@ def test_loading_CSV_y_ordenamiento():
     setUp()
     sort.insertionSort(lst_books,less)
     while not (lt.isEmpty(lst_books)):
-        x = int(lt.removeLast(lst_books)['goodreads_book_id'])
+        x = int(lt.removeLast(lst_books)['vote_average'])
         if not (lt.isEmpty(lst_books)):
-            y = int(lt.lastElement(lst_books)['goodreads_book_id'])
+            y = int(lt.lastElement(lst_books)['vote_average'])
         else:
             break
         assert x > y
